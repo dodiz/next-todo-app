@@ -4,3 +4,4 @@
 
 - Next.js 13
 - Tailwind
+- Redux toolkit
