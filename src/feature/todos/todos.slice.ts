@@ -20,19 +20,25 @@ export const todosSlice = createSlice({
     },
     check: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      const todo = state.todos.find((todo) => todo.id === id);
-      if (todo) {
-        todo.completed = true;
-        state.todos = [...state.todos];
-      }
+      state.todos = state.todos.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              completed: true,
+            }
+          : todo
+      );
     },
     unCheck: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      const todo = state.todos.find((todo) => todo.id === id);
-      if (todo) {
-        todo.completed = false;
-        state.todos = [...state.todos];
-      }
+      state.todos = state.todos.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              completed: false,
+            }
+          : todo
+      );
     },
     remove: (state, action: PayloadAction<string>) => {
       const id = action.payload;
@@ -43,5 +49,3 @@ export const todosSlice = createSlice({
     },
   },
 });
-
-export const { add, clearAll } = todosSlice.actions;

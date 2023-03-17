@@ -1,15 +1,8 @@
-import { useState, useCallback } from "react";
 import { BsCircle, BsCheckCircle, BsTrash } from "react-icons/bs";
 import { useTodo } from "~/hooks";
 
 export const TodosList: React.FC = () => {
   const { todos, check, unCheck, remove } = useTodo();
-  const [completed, setCompleted] = useState<string[]>(
-    todos.filter((todo) => todo.completed).map((todo) => todo.id)
-  );
-
-  console.log(todos.map((todo) => todo.completed));
-
   return (
     <>
       {todos.map((todo, i) => (
@@ -18,7 +11,7 @@ export const TodosList: React.FC = () => {
           className="group flex cursor-pointer select-none items-center justify-between border-b-2 border-gray-700 bg-gray-800 p-6 hover:bg-slate-800"
         >
           <div className="flex items-center">
-            {completed.indexOf(todo.id) !== -1 ? (
+            {todo.completed ? (
               <BsCheckCircle
                 onClick={() => unCheck(todo.id)}
                 className="slate-500 mr-4 h-6 w-6 fill-slate-400"
