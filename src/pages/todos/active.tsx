@@ -3,7 +3,7 @@ import { TodosList, AddTodo, TodoFooter } from "~/components";
 import { useTodo } from "~/hooks";
 
 const TodosPage: NextPage = () => {
-  const { allTodos } = useTodo();
+  const { activeTodos } = useTodo();
   return (
     <main
       className="flex h-full w-full justify-center overflow-auto bg-gray-900 bg-gradient-to-r
@@ -15,8 +15,8 @@ const TodosPage: NextPage = () => {
         </h1>
         <AddTodo />
         <div className="mb-96 rounded-md bg-gray-800">
-          <TodosList todos={allTodos} />
-          <TodoFooter todos={allTodos} />
+          <TodosList todos={activeTodos} />
+          <TodoFooter todos={activeTodos} />
         </div>
       </div>
     </main>

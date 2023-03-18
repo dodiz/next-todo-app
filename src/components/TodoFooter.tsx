@@ -1,8 +1,13 @@
 import { useTodo } from "~/hooks";
+import { Todo } from "~/types";
 import { NavLink } from "~/views";
 
-export const TodoFooter = () => {
-  const { todos, removeAllCompleted } = useTodo();
+type TodoFooterProps = {
+  todos: Todo[];
+};
+
+export const TodoFooter: React.FC<TodoFooterProps> = ({ todos }) => {
+  const { removeAllCompleted } = useTodo();
   return (
     <div className="flex justify-between p-6 text-base text-gray-500">
       <div>{todos.length} items left</div>

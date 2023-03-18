@@ -51,5 +51,8 @@ const todoSelector = (state: RootState) => state.todos;
 
 export const allTodosSelector = createSelector(todoSelector, (state) => state);
 export const activeTodosSelector = createSelector(todoSelector, (todos) =>
+  todos.filter((todo) => !todo.completed)
+);
+export const completedTodosSelector = createSelector(todoSelector, (todos) =>
   todos.filter((todo) => todo.completed)
 );

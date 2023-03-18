@@ -2,16 +2,18 @@ import { useCallback } from "react";
 import {
   activeTodosSelector,
   allTodosSelector,
+  completedTodosSelector,
   todosSlice,
   useAppDispatch,
   useAppSelector,
 } from "~/features";
-import { TodoCreate } from "~/types/TodoCreate";
+import { TodoCreate } from "~/types";
 
 export const useTodo = () => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(allTodosSelector);
+  const allTodos = useAppSelector(allTodosSelector);
   const activeTodos = useAppSelector(activeTodosSelector);
+  const completedTodos = useAppSelector(completedTodosSelector);
 
   const addTodo = useCallback(
     (todoCreate: TodoCreate) =>
@@ -33,8 +35,9 @@ export const useTodo = () => {
   );
 
   return {
-    todos,
+    allTodos,
     activeTodos,
+    completedTodos,
     addTodo,
     toggleTodo,
     removeTodo,
