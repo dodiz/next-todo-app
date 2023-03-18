@@ -11,7 +11,7 @@ import { todos } from "~/data";
  * Reducers
  */
 export const todosSlice = createSlice({
-  initialState: [] as Todo[],
+  initialState: todos as Todo[],
   name: "todos",
   reducers: {
     addTodo: (state, { payload }: PayloadAction<TodoCreate>) => {
@@ -25,25 +25,21 @@ export const todosSlice = createSlice({
       });
     },
     toggleTodo: (state, { payload }: PayloadAction<string>) => {
-      const id = payload;
-      state = state.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              completed: !todo.completed,
-            }
-          : todo
-      );
+      const todoId = payload;
+      const todo = state.find((todo) => todo.id === todoId);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
     },
     removeTodo: (state, { payload }: PayloadAction<string>) => {
-      const id = payload;
-      state = state.filter((todo) => todo.id !== id);
+      const todoId = payload;
+      const todoIndex = state.findIndex((todo) => todo.id === todoId);
+      if (todoIndex !== -1) {
+        state.splice(todoIndex, 1);
+      }
     },
     removeCompleted: (state) => {
-      state = state.filter((todos) => !todos.completed);
-    },
-    removeAll: (state) => {
-      state = [];
+      return state.filter((todo) => !todo.completed);
     },
   },
 });
