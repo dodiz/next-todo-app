@@ -11,6 +11,7 @@ export const AddTodo = () => {
       title,
       description: "",
     });
+    setTitle("");
   }, [title, addTodo]);
 
   return (
