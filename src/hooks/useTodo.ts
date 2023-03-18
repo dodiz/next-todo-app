@@ -1,47 +1,56 @@
 import { useCallback } from "react";
-import { Todo } from "~/types";
 import {
+  activeTodosSelector,
   allTodosSelector,
   todosSlice,
   useAppDispatch,
   useAppSelector,
-} from "~/feature";
+} from "~/features";
+import { TodoCreate } from "~/types/TodoCreate";
 
 export const useTodo = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(allTodosSelector);
+  const activeTodos = useAppSelector(activeTodosSelector);
 
-  const add = useCallback(
-    (todo: Todo) => {
-      dispatch(todosSlice.actions.add(todo));
+  const addTodo = useCallback(
+    (todoCreate: TodoCreate) => {
+      dispatch(todosSlice.actions.addTodo(todoCreate));
     },
     [dispatch]
   );
 
-  const check = useCallback(
+  const toggleTodo = useCallback(
     (todoId: string) => {
-      dispatch(todosSlice.actions.check(todoId));
+      dispatch(todosSlice.actions.toggleTodo(todoId));
     },
     [dispatch]
   );
-  const unCheck = useCallback(
+  /**
+   * Remove todo by id
+   */
+  const removeTodo = useCallback(
     (todoId: string) => {
-      dispatch(todosSlice.actions.unCheck(todoId));
+      dispatch(todosSlice.actions.removeTodo(todoId));
     },
     [dispatch]
   );
-  const remove = useCallback(
-    (todoId: string) => {
-      dispatch(todosSlice.actions.remove(todoId));
-    },
-    [dispatch]
-  );
+
+  const removeAllTodos = useCallback(() => {
+    dispatch(todosSlice.actions.removeAll);
+  }, [dispatch]);
+
+  const removeAllCompleted = useCallback(() => {
+    dispatch(todosSlice.actions.removeCompleted);
+  }, [dispatch]);
 
   return {
     todos,
-    add,
-    check,
-    unCheck,
-    remove,
+    activeTodos,
+    addTodo,
+    toggleTodo,
+    removeTodo,
+    removeAllTodos,
+    removeAllCompleted,
   };
 };
