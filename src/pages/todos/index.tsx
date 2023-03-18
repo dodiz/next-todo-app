@@ -1,11 +1,9 @@
 import type { NextPage, GetServerSideProps } from "next";
 import { TodosList, AddTodo, TodoFooter } from "~/components";
-import { NavLink } from "~/views";
-import { todos } from "~/data";
+import { useTodo } from "~/hooks";
 
-type TodosPageProps = {};
-
-const TodosPage: NextPage<TodosPageProps> = () => {
+const TodosPage: NextPage = () => {
+  const { todos } = useTodo();
   return (
     <main
       className="flex h-full w-full justify-center overflow-auto bg-gray-900 bg-gradient-to-r
@@ -17,7 +15,7 @@ const TodosPage: NextPage<TodosPageProps> = () => {
         </h1>
         <AddTodo />
         <div className="mb-96 rounded-md bg-gray-800">
-          <TodosList />
+          <TodosList todos={todos} />
           <TodoFooter />
         </div>
       </div>
@@ -25,9 +23,7 @@ const TodosPage: NextPage<TodosPageProps> = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<
-  TodosPageProps
-> = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {},
   };

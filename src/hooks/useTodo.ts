@@ -14,35 +14,23 @@ export const useTodo = () => {
   const activeTodos = useAppSelector(activeTodosSelector);
 
   const addTodo = useCallback(
-    (todoCreate: TodoCreate) => {
-      dispatch(todosSlice.actions.addTodo(todoCreate));
-    },
+    (todoCreate: TodoCreate) =>
+      dispatch(todosSlice.actions.addTodo(todoCreate)),
     [dispatch]
   );
-
   const toggleTodo = useCallback(
-    (todoId: string) => {
-      dispatch(todosSlice.actions.toggleTodo(todoId));
-    },
+    (todoId: string) => dispatch(todosSlice.actions.toggleTodo(todoId)),
     [dispatch]
   );
-  /**
-   * Remove todo by id
-   */
   const removeTodo = useCallback(
-    (todoId: string) => {
-      dispatch(todosSlice.actions.removeTodo(todoId));
-    },
+    (todoId: string) => dispatch(todosSlice.actions.removeTodo(todoId)),
     [dispatch]
   );
 
-  const removeAllTodos = useCallback(() => {
-    dispatch(todosSlice.actions.removeAll);
-  }, [dispatch]);
-
-  const removeAllCompleted = useCallback(() => {
-    dispatch(todosSlice.actions.removeCompleted);
-  }, [dispatch]);
+  const removeAllCompleted = useCallback(
+    () => dispatch(todosSlice.actions.removeCompleted()),
+    [dispatch]
+  );
 
   return {
     todos,
@@ -50,7 +38,6 @@ export const useTodo = () => {
     addTodo,
     toggleTodo,
     removeTodo,
-    removeAllTodos,
     removeAllCompleted,
   };
 };

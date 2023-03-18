@@ -1,8 +1,13 @@
 import { BsCircle, BsCheckCircle, BsTrash } from "react-icons/bs";
 import { useTodo } from "~/hooks";
+import { Todo } from "~/types";
 
-export const TodosList: React.FC = () => {
-  const { todos, toggleTodo, removeTodo } = useTodo();
+type TodosListProps = {
+  todos: Todo[];
+};
+
+export const TodosList: React.FC<TodosListProps> = ({ todos }) => {
+  const { toggleTodo, removeTodo } = useTodo();
   return (
     <>
       {todos.map((todo, i) => (
@@ -10,19 +15,24 @@ export const TodosList: React.FC = () => {
           key={todo.id}
           className="group flex cursor-pointer select-none items-center justify-between border-b-2 border-gray-700 bg-gray-800 p-6 hover:bg-slate-800"
         >
-          <div className="flex items-center">
-            {todo.completed ? (
-              <BsCheckCircle
-                onClick={() => toggleTodo(todo.id)}
-                className="slate-500 mr-4 h-6 w-6 fill-slate-400"
-              />
-            ) : (
-              <BsCircle
-                onClick={() => toggleTodo(todo.id)}
-                className="mr-4 h-6 w-6 fill-slate-400 stroke-0"
-              />
-            )}
-            <div className="flex-1 text-lg text-gray-300 ">{todo.title}</div>
+          <div>
+            <div className="flex items-center">
+              {todo.completed ? (
+                <BsCheckCircle
+                  onClick={() => toggleTodo(todo.id)}
+                  className="slate-500 mr-4 h-6 w-6 fill-slate-400"
+                />
+              ) : (
+                <BsCircle
+                  onClick={() => toggleTodo(todo.id)}
+                  className="mr-4 h-6 w-6 fill-slate-400 stroke-0"
+                />
+              )}
+              <div className="flex-1 text-lg text-gray-300 ">{todo.title}</div>
+            </div>
+            <div className="text-sm text-gray-500">
+              {"todo.createdAt.toISOString()"}
+            </div>
           </div>
           <div
             onClick={() => removeTodo(todo.id)}
