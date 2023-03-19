@@ -7,9 +7,6 @@ import { Todo, TodoCreate } from "~/types";
 import { RootState } from "~/features";
 import { todos } from "~/data";
 
-/**
- * Reducers
- */
 export const todosSlice = createSlice({
   initialState: todos as Todo[],
   name: "todos",
@@ -17,7 +14,7 @@ export const todosSlice = createSlice({
     addTodo: (state, { payload }: PayloadAction<TodoCreate>) => {
       const { title, description } = payload;
       state.push({
-        id: "" + state.length,
+        id: "" + Math.floor(Math.random() * 10000000),
         completed: false,
         title,
         description,
@@ -44,9 +41,6 @@ export const todosSlice = createSlice({
   },
 });
 
-/**
- * Selectors
- */
 const todoSelector = (state: RootState) => state.todos;
 
 export const allTodosSelector = createSelector(todoSelector, (state) => state);

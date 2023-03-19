@@ -15,10 +15,10 @@ export const TodoFooter: React.FC<TodoFooterProps> = ({ todos }) => {
         <NavLink className="mr-4" href="/todos">
           All
         </NavLink>
-        <NavLink className="mr-4" href="/todos/active">
+        <NavLink className="mr-4" href="/active">
           Active
         </NavLink>
-        <NavLink href="/todos/completed">Completed</NavLink>
+        <NavLink href="/completed">Completed</NavLink>
       </div>
       <a
         onClick={removeAllCompleted}
