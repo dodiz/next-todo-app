@@ -12,7 +12,7 @@ export const TodoFooter: React.FC<TodoFooterProps> = ({ todos }) => {
     <div className="flex justify-between p-6 text-base text-gray-500">
       <div>{todos.length} items left</div>
       <div className="[&>a:hover]:text-blue-600 [&>a]:font-semibold">
-        <NavLink className="mr-4" href="/todos">
+        <NavLink className="mr-4" href="/">
           All
         </NavLink>
         <NavLink className="mr-4" href="/active">
